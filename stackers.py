@@ -13,13 +13,21 @@ class stack():
         self.gaming = True
 
     def startGame(self):
-        pygame.time.set_timer(USEREVENT +1, 200)
+        pygame.time.set_timer(USEREVENT +1, 800)
         column = 0
+        speed = 0.3
         while self.gaming:
             for event in pygame.event.get():
+                if event.type == KEYDOWN:
+                    sense.set_pixel((column - 1), 7, (0, 255, 255))
+                    self.gaming = False
+                else:
+                    # turn on pixel and keep it on for 0.3 seconds
                     sense.set_pixel(column, 7, (0, 0, 255))
-                    time.sleep(0.5)
+                    time.sleep(speed)
+                    # turn off pixel and keep it off for 0.3 seconds
                     sense.set_pixel(column,7,(0,0,0))
+                    time.sleep(speed)
                     column += 1
                     if (column == 8):
                         column = 0
