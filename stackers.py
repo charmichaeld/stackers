@@ -21,10 +21,16 @@ class stack():
             for event in pygame.event.get():
                 if event.type == KEYDOWN:
                     sense.set_pixel(column, row, (0, 255, 255))
+                    if row == 7:
+                        stack_column = column
+                    else:
+                        if stack_column != column:
+                            sense.show_message("Game Over")
+                            self.gaming = False
                     column = 0
-                    row-=1
-                    if row < 0:
-                        sense.show_message("Game over")
+                    row -= 1
+                    if row == -1:
+                        sense.show_message("Winner")
                         self.gaming = False
                 else:
                     # turn on pixel and keep it on for 0.3 seconds
